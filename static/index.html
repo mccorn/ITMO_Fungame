@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <title>/ . . . /</title>
+    <style>
+    </style>
+    
+    <link rel="stylesheet" href="styles/styles.css" /> 
+    <link rel="stylesheet" href="styles/screen__waiting.css" /> 
+    <link rel="stylesheet" href="styles/screen__play__playdesk.css" />
+    <link rel="stylesheet" href="styles/screen__play__bottom.css" />
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script id="template__message" type="text/html">
+      <div class="message">
+        <span class="message__author">{{author}}</span>: 
+        <span class="message__text">{{text}}</span>  
+      </div>
+    </script>
+    <script id="template__waitlist" type="text/html">
+      <div class="playerslist__title">
+          <h4>Players: </h4>
+      </div>
+      <hr>
+      <div class="playerslist screen_waiting__playerslist" id="screen_waiting__playerslist">
+        {{#players}}
+          <div class="player__node">
+            {{#(myID == id)}}me:{{/(myID == id)}} {{nickname}}
+          </div>
+        {{/players}}
+      </div>
+      <div class="viewerslist__title">
+        <h4>Viewers: </h4>
+      </div>
+      <hr>
+      <div class="viewerslist screen_waiting__viewerslist" id="screen_waiting__viewerslist">
+        {{#viewers}}
+          <div class="viewer__node">
+            {{nickname}}
+          </div>
+        {{/viewers}}  
+      </div> 
+    </script>
+    <script id="template__playlist" type="text/html">
+      <div id="" class="column column_left">
+        <h4>Players: </h4>
+        <hr>
+        <div id='screen_play__playerslist' class='playerslist screen_play__playerslist'>
+          {{#players}}
+            <div class="player__node {{#isDied}}playernode__died{{/isDied}}">
+              {{nickname}}
+            </div>
+          {{/players}} 
+        </div>  
+      </div>
+      <div class="column column_center">
+        <h4>Viewers: </h4>
+        <hr>
+        <div id='screen_play__viewerslist' class='viewerslist screen_play__viewerslist'>
+          {{#viewers}}
+            <div class="viewer__node">
+              {{nickname}}
+            </div>
+          {{/viewers}} 
+        </div>    
+      </div> 
+    </script>
+    <script id="template__playdesk" type="text/html">
+      {{#players}}
+        <div id="{{id}}" class="player {{#isDied}}player__died{{/isDied}} {{style}}" style="left:{{x}}%">
+        </div> 
+      {{/players}} 
+      {{#hunter}}
+        <div id="hunter" class="hunter" style="left:{{x}}%"></div>
+      {{/hunter}} 
+    </script>
+  </head>
+  <body>
+  <div id="webpage" class="webpage">
+    <div class="screen screen_countdown">
+      <div class="countdown"></div>  
+    </div>
+    <div class="screen screen_modal"> 
+      <div id="modal_message" class="modal_message">
+        <div id="modal_message__text" class="modal_message__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam minus perferendis quis molestiae dolore ipsum asperiores maxime quam! Nulla repellendus eum esse quia, dolor asperiores aperiam quidem facilis. Doloribus tenetur consectetur, totam illum modi, ratione voluptatem perferendis at, rem numquam, laborum cumque sunt quibusdam fuga id culpa necessitatibus ut neque?</div>
+        <button id="modal_message__button" class="modal_message__button" onclick="restart()">O.K.</button>
+      </div>
+    </div>
+    
+    <div id="screen_waiting" class="screen screen_waiting">
+      <div class="screen_waiting__content">
+        <div class="rules_list" style="font-size: 16px">
+          <div class="rules_list__content moved">
+            Давным давно, 
+            в одной далекой-далекой галактике...
+            <br>
+            <br>
+            Мир и покой снова нарушены, вселенная трепещет в ожидании новых потрясений. На дальних рубежах лагерь оппозции, возглавляемый загадочным <strong>Темным Господином</strong>, из последних сил оказывает сопротевление на экзотической, независимой и ни хрена ни разу не толернатной планете <strong>2х2</strong>.
+            <br>
+            <br>
+            Тем временем в республике восседает на <span style="text-decoration: line-through">диване</span> троне <strong>Космический Мудозвон</strong>. Уставший от критики и комментариев в своем инстаграмме, он отправляется на ненавистную планету, чтобы отомстить ... за всю боль ...
+            <div class="keyboard">
+              <button class="button_a">A</button>
+              <button class="button_space hidden">SPACE</button> 
+              <button class="button_d">D</button>  
+            </div>  
+          </div>
+        </div>
+        <div class="wait_list">
+          <div id="wait_list__half_top" class="wait_list__half_top">
+            <div class="playerslist__title">
+              <h4>Players: </h4>
+            </div>
+            <div class="playerslist screen_waiting__playerslist" id="screen_waiting__playerslist">
+<!--              #template__playerslist  -->
+            </div>  
+          
+            <div class="viewerslist__title">
+              <h4>Viewers: </h4>
+            </div>
+            <div class="viewerslist screen_waiting__viewerslist" id="screen_waiting__viewerslist">
+<!--              #template__viewerslist  -->
+            </div> 
+          </div>  
+          <button class="wait_list__button" onclick="socket.emit('user want play', true);"> WANT play</button> 
+        </div> 
+      </div> 
+    </div>
+      
+    <div class="screen screen_play">
+      <div id="half_left" class="half_left">
+        <div class="box">
+          <div class="bg">
+          </div> 
+          <div id="playdesk" class="playdesk">
+<!--              #template__playdesk  -->
+            
+             <div class="hunter hunter_shout"></div>
+          </div>
+          <div class="chat">
+            <div id="textarea">
+<!--              #template__message  -->
+            </div>
+            <div id="chat__form">
+              <input id="message" type="text" placeholder="Введите сообщение">
+              <button onclick="send()" type="submit">
+                 Send
+              </button>  
+            </div>         
+          </div> 
+        </div>
+      </div>
+      <div id="half_right" class="half_right">
+        <div class="box">
+          <div id="playdesk__list" class="playdesk__list">
+<!--            #template__playerslist-->
+          </div>
+        </div>   
+      </div>
+    </div>      
+  </div>   
+  </body>
+  <script src="/socket.io/socket.io.js?x76428"></script>
+  <script src="/static/game.js?x76428"></script>
+  <script src="/static/view/view.js?x76428"></script>
+  <audio id="screen_waiting__audio" src="audio/rekviem.mp3" autoplay></audio>
+<!--  <audio id="screen_play__audio" src="audio/kenny_long.mp3" autoplay></audio>-->
+<!--  <audio id="screen_play__audio" src="audio/kenny.mp3"></audio>-->
+  <audio id="sound_shoot" src="audio/shoot.mp3"></audio>
+</html>

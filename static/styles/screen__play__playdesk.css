@@ -1,0 +1,219 @@
+.screen_play {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  display: none;
+}
+
+.half_left {
+  display: block;
+  width: 100%;
+}
+
+.half_left .box {
+  position: relative;
+  height: 70%;
+  min-width: 900px;
+  min-height: 500px;
+}
+
+.playdesk {
+  position: absolute;
+  top: 40px;
+  width: 650px;
+  height: 405px;
+  margin: auto;
+  border: 5px solid #999;  
+  background: url(../img/apocalypse.jpg) bottom center repeat;
+/*  background-size: 100% 400px;*/
+}
+
+.playdesk::after {
+  content: "";
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.bg {
+  top: 40px;
+  position: absolute;
+  width: 650px;
+  height: 405px;
+  margin: auto;
+/*  border: 2px solid blue;*/
+  height: 405px;
+  z-index: 20;
+}
+
+.hunter {
+/*  display: none;*/
+  position: absolute;
+  width: 50px;
+  height: 50px;  
+  font-size: 0;
+  z-index: 10;
+/*  background: #fff;*/
+  bottom: 0;
+  left: 20%;
+  z-index: 60;
+}
+
+.hunter::after {
+  position: absolute;
+  content: "";
+  width: 100px;
+  height: 100px; 
+  background: url(../img/gun.png) no-repeat;
+  background-size: 110% 70%;
+  background-position: -90% bottom;
+  left: 0%;
+  top: -100%;
+}
+
+.hunter::before {
+  position: absolute;
+  font-size: 100;
+  content: "";
+  width: 15px;
+  height: 15px; 
+  background: url(../img/target.png) center center no-repeat;
+  background-size: 15px 15px;
+/*  border: 2px solid red;*/
+  border-radius: 50%;
+  left: calc(50% - 7.5px);
+  top: -80%;
+}
+
+.player {
+  position: absolute;
+  bottom: 15%;
+  width: 7%;
+  font-size: 0;
+  height: 25%;
+/*  height: 100%;*/
+  left: 20%;
+/*  border: 2px solid white;*/
+  background: url(../img/person_1.png) center bottom no-repeat;
+  background-size: 150%;
+  z-index: 40;
+/*  transition: all 0.4s ease-in-out;*/
+}
+
+/*
+.green {
+  background: url(../img/persons.png) center no-repeat;
+  background-size: 630%;
+  background-position: 73% -20%;
+  left: 0%;
+}
+*/
+
+.blue {
+  background: url(../img/person_2.png) center bottom no-repeat;
+  background-size: 130%;
+  left: 20%;
+}
+
+.red {
+  background: url(../img/person_3.png) center bottom no-repeat;
+  background-size: 100%;
+/*  border: 2px solid white;*/
+  left: 40%;
+}
+
+.orange {
+  background: url(../img/person_4.png) center bottom no-repeat;
+  background-size: 100%;
+/*  border: 2px solid white;*/
+  left: 60%;
+}
+
+.black {
+  background: url(../img/person_5.png) center bottom no-repeat;
+  background-size: 100%;
+  left: 80%;
+}
+
+.player__died::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  left: 0%;
+  top: 0%;
+/*  border: 2px solid black;*/
+  background: url(../img/mask.png) center bottom no-repeat;
+  background-size: 100%;
+}
+
+.player__died {
+/*  border: 2px solid black;*/
+  transform: rotate(90deg);
+  transform-origin: center bottom;
+}
+
+.player__died:nth-child(2n-1) {
+/*  border: 2px solid black;*/
+  transform: rotate(-90deg);
+  transform-origin: center bottom;
+}
+
+/*--- Chat ---*/
+.chat {
+  position: absolute;
+  width: 250px;
+  height: 405px;
+  top: 40px;
+  left: 650px;
+  background: rgba(100, 10, 100, 0.1);
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#textarea {
+  overflow-y: auto;
+  height: 100%;
+  border: 2px solid #666;
+  background: rgba(155, 55, 55, 0.8);
+  color: #eee;
+}
+
+.message__author {
+  color: #00f;
+  font-weight: 1000;
+  text-decoration: underline;
+}
+
+#chat__form {
+  display: flex;
+  height: 20px;
+  justify-content: space-between;
+}
+
+#chat__form input[type="text"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #fff;
+/*  color: #fff;*/
+}
+
+#chat__form button {
+  width: 80px;
+  background: rgba(0, 100, 0, 0.8);
+  border: 2px solid rgba(0, 100, 0, 0.8);
+  color: white;
+  font-size: 12px;
+}
+
+#chat__form button:hover {
+  cursor: pointer;
+  font-size: 15px;
+}

@@ -1,0 +1,147 @@
+.screen_waiting {
+  z-index: 100;
+  background: rgba(0, 0, 0, 1) url(../img/bg_black_left.jpg) left bottom no-repeat;
+  background-size: cover;
+  justify-content: center;
+  flex-direction: column;
+/*  Отрубить перед показом*/
+/*  display: none; */
+}
+
+.screen_waiting__content {
+  background-color: rgba(55, 55, 55, 0.5);
+  width: 80%;
+  height: 65vh;
+  min-height: 450px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.rules_list {
+  text-align: left;
+  width: 100%;
+  overflow: hidden;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px 20px;
+/*  border: 2px solid blue;*/
+  
+}
+
+.rules_list__content {
+  width: 350px;
+  height: 0;
+  margin: 0 auto;
+}
+
+.moved{
+  animation: moveshow 20s 1 linear;
+}
+
+@keyframes moveshow {
+  0% {
+    margin-top: 120%;  
+  }
+  100% {
+    margin-top: 0%;
+  }
+}
+
+.wait_list {
+  position: relative;
+  width: 60%; 
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wait_list__button {
+/*  animation: moveshow 20s 1 linear;*/
+}
+
+.playerslist {
+  height: 150px;
+  overflow: hidden;
+}
+
+.wait_list .viewerslist {
+  height: 150px;
+  overflow: hidden;
+}
+
+.playerslist__title {
+  margin: 10px;
+}
+
+.wait_list__button:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.keyboard {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 40px 20px 10px;
+}
+
+.keyboard button {
+  position: relative;
+  margin: 10px;
+  height: 40px;
+  min-width: 40px;
+  color: white;
+  background: none;
+}
+
+.keyboard .button_a::after {
+  position: absolute;
+  width: 60px;
+  height: 15px;
+  top: -70%;
+  left: -50%;
+  content: "◀ LEFT";
+  color: white;
+  background: none;
+}
+
+.keyboard .button_d::after {
+  position: absolute;
+  width: 60px;
+  height: 15px;
+  top: -70%;
+  left: -20%;
+  content: "RIGHT ▶";
+  color: white;
+  background: none;
+}
+
+.keyboard .button_space::after {
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  top: -70%;
+  left: 0%;
+  content: "▲ JUMP ▲";
+  color: white;
+  background: none;
+}
+
+.keyboard .button_space {
+  flex: 1;
+}
+
+strong {
+  text-shadow: 2px 2px 2px red;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+.hidden {
+  display: none;
+}
